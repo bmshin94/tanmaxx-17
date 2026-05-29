@@ -1,6 +1,7 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useMatches } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 import { MaxxSlider } from './Maxx/MaxxSlider'
+import { getRouteLibraries } from '../lib/route-libraries'
 
 const NAV = [
   { to: '/', label: 'Dashboard' },
@@ -11,6 +12,10 @@ const NAV = [
 ] as const
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const matches = useMatches()
+  const leaf = matches[matches.length - 1]
+  const libCount = getRouteLibraries(leaf?.routeId).libs.length
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="border-b border-white/10 bg-black/40 backdrop-blur">
@@ -33,7 +38,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3 text-xs">
             <MaxxSlider />
             <div data-maxx-counter className="rounded border border-white/20 px-2 py-1 font-mono">
-              MAXX 1/16
+              MAXX {libCount}/16
             </div>
           </div>
         </div>
