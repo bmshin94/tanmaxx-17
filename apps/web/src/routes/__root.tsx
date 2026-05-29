@@ -4,6 +4,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { AppShell } from '../components/AppShell'
+import { RouteLibsBadge } from '../components/RouteLibsBadge'
 import { useMaxxStyle } from '../hooks/use-maxx-style'
 
 import appCss from '../styles.css?url'
@@ -61,6 +62,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <MaxxStyleMount />
         <AppShell>{children}</AppShell>
+        <RouteLibsBadge />
         <TanStackDevtools
           config={{ position: 'bottom-right' }}
           plugins={[

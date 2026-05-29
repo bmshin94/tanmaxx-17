@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { useStore } from '@tanstack/react-store'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { maxxStore } from '../state/maxx-store'
 
 export default function AgentChat() {
@@ -31,18 +33,20 @@ export default function AgentChat() {
         </span>
       </div>
 
-      <div className="space-y-3 rounded border border-white/10 bg-black/20 p-3 min-h-[40vh]">
+      <div className="space-y-4 rounded border border-white/10 bg-black/20 p-4 min-h-[40vh]">
         {messages.length === 0 ? (
           <div className="text-sm opacity-50">
-            Try: <em>“What are my PRs?”</em> or <em>“Build me a 4-week strength program.”</em>
+            Try: <em>"What are my PRs?"</em> or <em>"Build me a 4-week strength program."</em>
           </div>
         ) : (
           messages.map((m) => (
             <div key={m.id} className="text-sm">
-              <div className="mb-1 text-xs uppercase tracking-wide opacity-50">{m.role}</div>
-              {m.parts.map((part, i) => (
-                <MessagePart key={i} part={part} />
-              ))}
+              <div className="mb-1 text-[10px] uppercase tracking-widest opacity-40">{m.role}</div>
+              <div className="space-y-2">
+                {m.parts.map((part, i) => (
+                  <MessagePart key={i} part={part} />
+                ))}
+              </div>
             </div>
           ))
         )}
@@ -79,19 +83,40 @@ export default function AgentChat() {
 
 function MessagePart({ part }: { part: { type: string } }) {
   const p = part as unknown as Record<string, unknown>
+
   if (part.type === 'text') {
-    return <p className="whitespace-pre-wrap">{String(p.text ?? '')}</p>
-  }
-  if (part.type.startsWith('tool-')) {
-    const toolName = part.type.replace(/^tool-/, '')
     return (
-      <div className="my-2 rounded border border-white/15 bg-black/40 p-2 text-xs font-mono">
-        <div className="opacity-60">tool: {toolName}</div>
-        <pre className="mt-1 overflow-auto whitespace-pre-wrap break-words">
-          {JSON.stringify(p, null, 2)}
-        </pre>
+      <div className="md-content">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {String(p.text ?? '')}
+        </ReactMarkdown>
       </div>
     )
   }
+
+  if (part.type.startsWith('tool-')) {
+    const toolName = part.type.replace(/^tool-/, '')
+    const state = String(p.state ?? '')
+    const running = state === 'input-streaming' || state === 'input-available'
+    const errored = state === 'output-error'
+    return (
+      <div
+        className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-mono text-[11px] ${
+          errored
+            ? 'border-rose-400/40 bg-rose-400/10 text-rose-200'
+            : running
+              ? 'border-amber-400/40 bg-amber-400/10 text-amber-200'
+              : 'border-emerald-400/30 bg-emerald-400/10 text-emerald-200'
+        }`}
+      >
+        <span aria-hidden className="text-[10px] opacity-70">
+          {errored ? '✕' : running ? '◐' : '✓'}
+        </span>
+        <span className="opacity-70">{running ? 'calling' : errored ? 'failed' : 'called'}</span>
+        <span className="font-semibold">{toolName}</span>
+      </div>
+    )
+  }
+
   return null
 }
