@@ -82,6 +82,7 @@ export const ROUTE_LIBRARIES: Record<string, RouteLibrariesEntry> = {
     libs: [
       ...ALWAYS_ON,
       { lib: 'ai', doing: 'Streaming useChat + Anthropic tools' },
+      { lib: 'workflow', doing: 'generateProgram runs as a 4-step durable workflow' },
       { lib: 'intent', doing: 'Skill ships in packages/skill (gen:skill)' },
     ],
   },

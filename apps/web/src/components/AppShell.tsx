@@ -38,7 +38,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3 text-xs">
             <MaxxSlider />
             <div data-maxx-counter className="rounded border border-white/20 px-2 py-1 font-mono">
-              MAXX {libCount}/16
+              MAXX {libCount}/17
             </div>
           </div>
         </div>

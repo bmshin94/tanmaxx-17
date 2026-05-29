@@ -1,10 +1,8 @@
-import { tool, generateObject } from 'ai'
+import { tool } from 'ai'
 import { z } from 'zod'
 import { logSet } from '../functions/log-set'
 import { listPRs } from '../functions/list-prs'
-import { listHistory } from '../functions/list-history'
-import { programSchema } from '@gainsmax/shared'
-import { anthropic, MODEL_SMART } from './anthropic'
+import { runGenerateProgram } from '../workflows/generate-program'
 
 export function buildAgentTools(opts: { sessionId: string; lower: number; upper: number }) {
   return {
@@ -49,19 +47,13 @@ export function buildAgentTools(opts: { sessionId: string; lower: number; upper:
         focus: z.string().describe('e.g. "squat", "hypertrophy", "peaking"'),
       }),
       execute: async ({ weeks, focus }) => {
-        const [prs, history] = await Promise.all([listPRs(), listHistory()])
-        const result = await generateObject({
-          model: anthropic()(MODEL_SMART),
-          schema: programSchema,
-          prompt: [
-            `Design a ${weeks}-week ${focus} program.`,
-            `Intensity range: ${opts.lower}% to ${opts.upper}% of 1RM (Maxx slider).`,
-            `Recent PRs: ${JSON.stringify(prs.slice(0, 10))}`,
-            `Sample history rows: ${JSON.stringify(history.slice(0, 10))}`,
-            `Return a Program object with workouts[] and per-exercise targets.`,
-          ].join('\n'),
+        const { program, steps } = await runGenerateProgram({
+          weeks,
+          focus,
+          lower: opts.lower,
+          upper: opts.upper,
         })
-        return { program: result.object }
+        return { program, workflow: { id: 'generate-program', steps } }
       },
     }),
   }

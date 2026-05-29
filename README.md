@@ -24,6 +24,7 @@ Local-first lifting tracker with offline-friendly set logging and AI-generated p
 | 14 | **Ranger** (`@tanstack/react-ranger`) | The Maxx two-handle slider — drives the theme engine |
 | 15 | **Intent** (`@tanstack/intent`) | Ships `packages/skill` as a discoverable Agent Skill |
 | 16 | **Devtools** (`@tanstack/react-devtools`) | Stacked panels — the punchline shot |
+| 17 | **Workflow** (`@tanstack/workflow-core`) | `generateProgram` tool body runs as a 4-step durable workflow |
 
 ## Monorepo layout
 

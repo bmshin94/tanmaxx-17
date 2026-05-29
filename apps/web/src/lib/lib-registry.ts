@@ -132,6 +132,14 @@ export const LIBRARIES: Record<string, Library> = {
     textOnColor: 'black',
     tagline: 'Headless multi-range slider primitives',
   },
+  workflow: {
+    id: 'workflow',
+    name: 'WORKFLOW',
+    color: '#14b8a6',
+    textOnColor: 'black',
+    status: 'alpha',
+    tagline: 'Durable, type-safe step orchestration',
+  },
 }
 
 export type LibId = keyof typeof LIBRARIES
