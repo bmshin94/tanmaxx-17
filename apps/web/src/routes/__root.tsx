@@ -3,7 +3,10 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
+import { PacerDevtoolsPanel } from '@tanstack/react-pacer-devtools'
+import { FormDevtoolsPanel } from '@tanstack/react-form-devtools'
 import { AppShell } from '../components/AppShell'
+import { CollectionsDevtoolsPanel } from '../components/devtools/CollectionsDevtoolsPanel'
 import { RouteLibsBadge } from '../components/RouteLibsBadge'
 import { useMaxxStyle } from '../hooks/use-maxx-style'
 
@@ -68,6 +71,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           plugins={[
             { name: 'TanStack Router', render: <TanStackRouterDevtoolsPanel /> },
             { name: 'TanStack Query', render: <ReactQueryDevtoolsPanel /> },
+            { name: 'TanStack DB', render: <CollectionsDevtoolsPanel /> },
+            { name: 'TanStack Pacer', render: <PacerDevtoolsPanel /> },
+            { name: 'TanStack Form', render: <FormDevtoolsPanel /> },
           ]}
         />
         <Scripts />
