@@ -1,0 +1,20 @@
+{
+  "name": "@gainsmax/skill",
+  "version": "0.1.0",
+  "description": "Agent skill for driving the GainsMax lifting tracker",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jherr/gainsmax.git",
+    "directory": "packages/skill"
+  },
+  "keywords": ["tanstack-intent", "agent-skill", "gainsmax"],
+  "files": ["skills"],
+  "intent": {
+    "version": 1,
+    "skills_root": "skills"
+  },
+  "devDependencies": {
+    "@tanstack/intent": "^0.0.41"
+  }
+}

@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/anton.woff2") format("woff2");
+  size-adjust: 110%;
+}
+
+:root {
+  color-scheme: dark;
+
+  --maxx-accent: hsl(200 80% 55%);
+  --maxx-font-scale: 1;
+  --maxx-tracking: 0em;
+  --maxx-weight: 400;
+  --maxx-shake: 0px;
+  --maxx-italic: 0deg;
+  --maxx-glow: 0 0 0 transparent;
+  --maxx-stroke: 0px transparent;
+  --maxx-intensity-lo: 40;
+  --maxx-intensity-hi: 60;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0a0a0a;
+  color: #fafafa;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-weight: var(--maxx-weight);
+  letter-spacing: var(--maxx-tracking);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--maxx-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--maxx-accent);
+}
+
+h1, h2, h3 {
+  font-size: calc(1em * var(--maxx-font-scale));
+  letter-spacing: var(--maxx-tracking);
+  font-weight: var(--maxx-weight);
+  text-shadow: var(--maxx-glow);
+  -webkit-text-stroke: var(--maxx-stroke);
+}
+
+/* ---------- Tier overrides ---------- */
+
+:root[data-maxx-tier="deload"] {
+  color: #9aa0a6;
+}
+:root[data-maxx-tier="deload"] h1,
+:root[data-maxx-tier="deload"] h2,
+:root[data-maxx-tier="deload"] h3 {
+  text-transform: lowercase;
+  font-weight: 300;
+  color: #9aa0a6;
+}
+
+:root[data-maxx-tier="strength"] h1,
+:root[data-maxx-tier="strength"] h2,
+:root[data-maxx-tier="strength"] h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+:root[data-maxx-tier="peaking"] h1,
+:root[data-maxx-tier="peaking"] h2,
+:root[data-maxx-tier="peaking"] h3 {
+  font-weight: 800;
+}
+
+:root[data-maxx-tier="sendmode"] body,
+:root[data-maxx-tier="sendmode"] h1,
+:root[data-maxx-tier="sendmode"] h2,
+:root[data-maxx-tier="sendmode"] h3 {
+  text-transform: uppercase;
+  font-stretch: condensed;
+}
+
+:root[data-maxx-tier="gigamaxx"] body,
+:root[data-maxx-tier="gigamaxx"] h1,
+:root[data-maxx-tier="gigamaxx"] h2,
+:root[data-maxx-tier="gigamaxx"] h3 {
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+:root[data-maxx-tier="gigamaxx"] button::after {
+  content: "!";
+}
+
+:root[data-maxx-tier="injury"] body {
+  animation: maxx-pulse-red 1s infinite;
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  font-style: oblique calc(var(--maxx-italic) * -1);
+}
+:root[data-maxx-tier="injury"] [data-pr-widget] {
+  transform: rotate(-2deg);
+}
+:root[data-maxx-tier="injury"] [data-log-button]::before {
+  content: "SEND IT — ";
+}
+:root[data-maxx-tier="injury"] [data-log-button] {
+  animation: maxx-shake 0.18s infinite;
+}
+
+@keyframes maxx-pulse-red {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: inset 0 0 0 4px #b00020;
+  }
+}
+
+@keyframes maxx-shake {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(var(--maxx-shake) * -1), 0);
+  }
+  75% {
+    transform: translate(var(--maxx-shake), 0);
+  }
+}
