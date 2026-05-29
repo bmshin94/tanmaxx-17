@@ -1,4 +1,7 @@
-import { useHotkey, useHotkeySequence } from '@tanstack/react-hotkeys'
+import { useMemo } from 'react'
+import { useHotkey, useHotkeySequence, useHeldKeys } from '@tanstack/react-hotkeys'
+
+const MODIFIER_ONLY = new Set(['Shift', 'Control', 'Meta', 'Alt', 'Hyper', 'Super'])
 
 export type HotkeyHandlers = Partial<{
   'log-set': () => void
@@ -18,7 +21,7 @@ export type HotkeyHandlers = Partial<{
 
 const noop = () => {}
 
-export function useAppHotkeys(handlers: HotkeyHandlers) {
+export function useAppHotkeys(handlers: HotkeyHandlers): { heldKeys: ReadonlySet<string> } {
   // Session-scope bindings. Space stays enabled inside inputs so the form can submit.
   useHotkey('Space', handlers['log-set'] ?? noop, { enabled: !!handlers['log-set'] })
   useHotkey('ArrowUp', (e) => { e.preventDefault(); handlers['weight-up']?.() }, {
@@ -54,4 +57,14 @@ export function useAppHotkeys(handlers: HotkeyHandlers) {
   useHotkey({ key: '/', shift: true }, handlers['toggle-overlay'] ?? noop, {
     enabled: !!handlers['toggle-overlay'],
   })
+
+  // Live readout of physically held keys (passive — not a hotkey binding).
+  // Hide modifier-only states so a resting hand on Shift doesn't fill the pill.
+  const raw = useHeldKeys()
+  const heldKeys = useMemo<ReadonlySet<string>>(() => {
+    const hasNonMod = raw.some((k) => !MODIFIER_ONLY.has(k))
+    return new Set(hasNonMod ? raw : raw.filter((k) => !MODIFIER_ONLY.has(k)))
+  }, [raw])
+
+  return { heldKeys }
 }

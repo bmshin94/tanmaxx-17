@@ -60,7 +60,7 @@ function Session() {
     },
   })
 
-  useAppHotkeys({
+  const { heldKeys } = useAppHotkeys({
     'log-set': () => form.handleSubmit(),
     'weight-up': () => form.setFieldValue('weight', (v) => Math.max(0, (v ?? 0) + 5)),
     'weight-down': () => form.setFieldValue('weight', (v) => Math.max(0, (v ?? 0) - 5)),
@@ -174,11 +174,14 @@ function Session() {
         </button>
       </form>
 
-      <div className="flex items-center justify-between text-xs opacity-70">
+      <div className="flex items-center justify-between gap-3 text-xs opacity-70">
         <span>
           [ / ] cycle exercises · arrows tune weight/reps · ? for help
         </span>
-        <RestTimer />
+        <div className="flex items-center gap-2">
+          <HeldKeysPill heldKeys={heldKeys} />
+          <RestTimer />
+        </div>
       </div>
 
       <NLSetInput
@@ -224,9 +227,32 @@ function Session() {
         )}
       </div>
 
-      <HotkeyOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} />
+      <HotkeyOverlay open={overlayOpen} onClose={() => setOverlayOpen(false)} heldKeys={heldKeys} />
     </section>
   )
+}
+
+function HeldKeysPill({ heldKeys }: { heldKeys: ReadonlySet<string> }) {
+  // Reserve width so the row doesn't reflow when the pill mounts.
+  const empty = heldKeys.size === 0
+  return (
+    <div
+      aria-live="polite"
+      className={`min-w-[64px] rounded border px-2 py-0.5 text-right font-mono text-[10px] transition-opacity ${
+        empty
+          ? 'border-transparent opacity-0'
+          : 'border-cyan-400/40 bg-cyan-400/10 text-cyan-100 opacity-100'
+      }`}
+    >
+      {empty ? '·' : [...heldKeys].map(formatKey).join(' + ')}
+    </div>
+  )
+}
+
+function formatKey(k: string): string {
+  if (k === ' ' || k === 'Space') return '␣'
+  if (k.startsWith('Arrow')) return k.slice(5).toLowerCase()
+  return k.length === 1 ? k.toUpperCase() : k
 }
 
 function exerciseNameOf(
