@@ -21,7 +21,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <header className="border-b border-white/10 bg-black/40 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link to="/" className="text-lg font-black tracking-tight">
-            TanMax
+            TanMaxx
           </Link>
           <nav className="flex items-center gap-4 text-sm">
             {NAV.map((item) => (

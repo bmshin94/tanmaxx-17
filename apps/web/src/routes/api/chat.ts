@@ -24,7 +24,7 @@ export const Route = createFileRoute('/api/chat')({
         const result = streamText({
           model: anthropic()(MODEL_SMART),
           system:
-            'You are a strength-training coach inside the GainsMax app. Use the available tools to log sets, fetch PRs, and generate programs. Be concise and direct.',
+            'You are a strength-training coach inside the TanMaxx app. Use the available tools to log sets, fetch PRs, and generate programs. Be concise and direct.',
           messages: await convertToModelMessages(body.messages),
           tools,
           stopWhen: stepCountIs(4),

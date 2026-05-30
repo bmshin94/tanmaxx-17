@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import { desc } from 'drizzle-orm'
-import type { Session } from '@gainsmax/shared'
+import type { Session } from '@tanmaxx/shared'
 import { getDb, schema } from '../db/client'
 
 export const listSessions = createServerFn({ method: 'GET' }).handler(async (): Promise<Session[]> => {

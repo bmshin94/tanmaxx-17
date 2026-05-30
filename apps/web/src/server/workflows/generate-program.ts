@@ -5,7 +5,7 @@ import {
 } from '@tanstack/workflow-core'
 import { generateObject } from 'ai'
 import { z } from 'zod'
-import { programSchema, type Program } from '@gainsmax/shared'
+import { programSchema, type Program } from '@tanmaxx/shared'
 import { anthropic, MODEL_SMART } from '../ai/anthropic'
 import { listPRs } from '../functions/list-prs'
 import { listHistory } from '../functions/list-history'

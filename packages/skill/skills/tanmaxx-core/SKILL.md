@@ -1,19 +1,19 @@
 ---
-name: gainsmax-core
+name: tanmaxx-core
 description: >
-  Programmatically drive the GainsMax lifting tracker. Use this skill when an
+  Programmatically drive the TanMaxx lifting tracker. Use this skill when an
   agent needs to log sets (logSet), inspect personal records (queryPRs), or
   request a Maxx-tuned training program (generateProgram) from a running
-  GainsMax instance. All entrypoints are TanStack Start server functions that
+  TanMaxx instance. All entrypoints are TanStack Start server functions that
   validate input with Zod and accept the same shapes used inside the app.
 type: core
-library: gainsmax
+library: tanmaxx
 library_version: '0.1.0'
 ---
 
-# GainsMax — Agent API
+# TanMaxx — Agent API
 
-GainsMax exposes three agent-callable server functions. They live in a TanStack Start app and are reachable from any client that can POST JSON to the running server.
+TanMaxx exposes three agent-callable server functions. They live in a TanStack Start app and are reachable from any client that can POST JSON to the running server.
 
 | Function | Purpose |
 |---|---|
@@ -21,7 +21,7 @@ GainsMax exposes three agent-callable server functions. They live in a TanStack 
 | `queryPRs` | Fetch the top weight (PR proxy) per exercise across all logged sessions. |
 | `generateProgram` | Generate a multi-week strength program tailored to recent training history and the user’s current Maxx intensity range. |
 
-The Maxx slider (lower–upper, range 0–110) is the intensity authority. Read it from localStorage key `gainsmax.maxx` (`{ lower: number; upper: number }`) before calling `generateProgram`.
+The Maxx slider (lower–upper, range 0–110) is the intensity authority. Read it from localStorage key `tanmaxx.maxx` (`{ lower: number; upper: number }`) before calling `generateProgram`.
 
 ## Entrypoints
 

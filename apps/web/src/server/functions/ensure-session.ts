@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { eq } from 'drizzle-orm'
-import type { Session } from '@gainsmax/shared'
+import type { Session } from '@tanmaxx/shared'
 import { getDb, schema } from '../db/client'
 
 export const ensureSession = createServerFn({ method: 'POST' })

@@ -1,5 +1,5 @@
 {
-  "name": "@gainsmax/web",
+  "name": "@tanmaxx/web",
   "private": true,
   "type": "module",
   "imports": {
@@ -17,8 +17,8 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.81",
     "@ai-sdk/react": "^3.0.194",
-    "@gainsmax/shared": "workspace:*",
-    "@gainsmax/skill": "workspace:*",
+    "@tanmaxx/shared": "workspace:*",
+    "@tanmaxx/skill": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/db": "^0.6.7",
     "@tanstack/pacer": "^0.21.1",

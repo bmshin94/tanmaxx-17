@@ -1,18 +1,18 @@
 {
-  "name": "gainsmax",
+  "name": "tanmaxx",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "pnpm --filter @gainsmax/web dev",
-    "build": "pnpm --filter @gainsmax/web build",
-    "preview": "pnpm --filter @gainsmax/web preview",
+    "dev": "pnpm --filter @tanmaxx/web dev",
+    "build": "pnpm --filter @tanmaxx/web build",
+    "preview": "pnpm --filter @tanmaxx/web preview",
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
-    "gen:skill": "pnpm --filter @gainsmax/web gen:skill",
+    "gen:skill": "pnpm --filter @tanmaxx/web gen:skill",
     "skill:list": "intent list",
     "skill:validate": "intent validate packages/skill",
-    "skill:publish": "pnpm --filter @gainsmax/skill publish --access public"
+    "skill:publish": "pnpm --filter @tanmaxx/skill publish --access public"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

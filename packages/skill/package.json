@@ -1,14 +1,14 @@
 {
-  "name": "@gainsmax/skill",
+  "name": "@tanmaxx/skill",
   "version": "0.1.0",
-  "description": "Agent skill for driving the GainsMax lifting tracker",
+  "description": "Agent skill for driving the TanMaxx lifting tracker",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jherr/gainsmax.git",
+    "url": "git+https://github.com/jherr/tanmaxx.git",
     "directory": "packages/skill"
   },
-  "keywords": ["tanstack-intent", "agent-skill", "gainsmax"],
+  "keywords": ["tanstack-intent", "agent-skill", "tanmaxx"],
   "files": ["skills"],
   "intent": {
     "version": 1,

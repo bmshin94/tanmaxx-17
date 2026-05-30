@@ -1,5 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
-import type { Program } from '@gainsmax/shared'
+import type { Program } from '@tanmaxx/shared'
 import { getDb, schema } from '../db/client'
 
 export const listPrograms = createServerFn({ method: 'GET' }).handler(async (): Promise<Program[]> => {

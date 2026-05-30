@@ -1,5 +1,5 @@
 import { Store } from '@tanstack/store'
-import type { SetDraft } from '@gainsmax/shared'
+import type { SetDraft } from '@tanmaxx/shared'
 
 export type RestTimer = {
   startedAt: number

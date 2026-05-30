@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { eq } from 'drizzle-orm'
 import { z } from 'zod'
-import type { Session, Set } from '@gainsmax/shared'
+import type { Session, Set } from '@tanmaxx/shared'
 import { getDb, schema } from '../db/client'
 
 export const getSession = createServerFn({ method: 'GET' })

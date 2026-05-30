@@ -4,7 +4,7 @@ import { mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import * as schema from './schema.ts'
 
-const DB_PATH = resolve(process.cwd(), '.data/gainsmax.db')
+const DB_PATH = resolve(process.cwd(), '.data/tanmaxx.db')
 
 let _db: ReturnType<typeof drizzle> | undefined
 

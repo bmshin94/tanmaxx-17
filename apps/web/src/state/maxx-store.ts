@@ -1,6 +1,6 @@
 import { Store } from '@tanstack/store'
 
-const STORAGE_KEY = 'gainsmax.maxx'
+const STORAGE_KEY = 'tanmaxx.maxx'
 const DEFAULT_STATE = { lower: 40, upper: 60 }
 
 export type MaxxState = { lower: number; upper: number }

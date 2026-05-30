@@ -90,5 +90,5 @@ export const ROUTE_LIBRARIES: Record<string, RouteLibrariesEntry> = {
 
 export function getRouteLibraries(routeId: string | undefined): RouteLibrariesEntry {
   if (routeId && ROUTE_LIBRARIES[routeId]) return ROUTE_LIBRARIES[routeId]
-  return { title: 'GainsMax', libs: ALWAYS_ON }
+  return { title: 'TanMaxx', libs: ALWAYS_ON }
 }

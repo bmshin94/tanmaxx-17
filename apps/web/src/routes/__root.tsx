@@ -16,7 +16,7 @@ import appCss from '../styles.css?url'
 // avoiding theme/font flash on reload (the joke lands harder when a fresh load opens in GIGAMAXX).
 const MAXX_INIT_SCRIPT = `
 (function(){try{
-var raw=localStorage.getItem('gainsmax.maxx');if(!raw)return;
+var raw=localStorage.getItem('tanmaxx.maxx');if(!raw)return;
 var s=JSON.parse(raw);if(typeof s.upper!=='number')return;
 var u=s.upper;var tiers=[['deload',0],['volume',20],['hypertrophy',40],['strength',60],['peaking',75],['sendmode',90],['gigamaxx',100],['injury',105]];
 var t=tiers[0][0];for(var i=tiers.length-1;i>=0;i--){if(u>=tiers[i][1]){t=tiers[i][0];break;}}
@@ -34,7 +34,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'TanMax' },
+      { title: 'TanMaxx' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },

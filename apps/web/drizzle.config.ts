@@ -5,6 +5,6 @@ export default defineConfig({
   schema: './src/server/db/schema.ts',
   out: './drizzle',
   dbCredentials: {
-    url: './.data/gainsmax.db',
+    url: './.data/tanmaxx.db',
   },
 })

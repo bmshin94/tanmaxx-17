@@ -1,12 +1,12 @@
 import { z } from 'zod'
-import { setDraftSchema } from '@gainsmax/shared'
+import { setDraftSchema } from '@tanmaxx/shared'
 
 /**
- * Single source of truth for the agent-callable surface of GainsMax.
+ * Single source of truth for the agent-callable surface of TanMaxx.
  *
  * This metadata drives:
  *   - The Vercel AI SDK tool wrappers (apps/web/src/server/ai/tools.ts)
- *   - The Agent Skill rendered to packages/skill/skills/gainsmax-core/SKILL.md
+ *   - The Agent Skill rendered to packages/skill/skills/tanmaxx-core/SKILL.md
  *
  * If you add a server function intended for agents, register it here.
  */

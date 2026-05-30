@@ -1,6 +1,6 @@
-# GainsMax
+# TanMaxx
 
-> A single-user lifting tracker that uses every TanStack library. Built as the demo app for the "tanmax" video — a tour of TanStack in a silly format.
+> A single-user lifting tracker that uses every TanStack library. Built as the demo app for the "tanmaxx" video — a tour of TanStack in a silly format.
 
 Local-first lifting tracker with offline-friendly set logging and AI-generated programs. Centerpiece is **The Maxx** — a Ranger-driven intensity slider that controls program generation *and* the entire app's visual style, going progressively more unhinged as it climbs (Deload → Volume → Hypertrophy → Strength → Peaking → Sendmode → **GIGAMAXX** → **INJURY ZONE**).
 
@@ -29,7 +29,7 @@ Local-first lifting tracker with offline-friendly set logging and AI-generated p
 ## Monorepo layout
 
 ```
-gainsmax/
+tanmaxx/
 ├── apps/
 │   └── web/                        # TanStack Start app
 │       ├── src/
@@ -44,7 +44,7 @@ gainsmax/
 ├── packages/
 │   ├── shared/                     # Zod schemas + types
 │   └── skill/                      # Agent Skill discoverable by @tanstack/intent
-│       └── skills/gainsmax-core/SKILL.md
+│       └── skills/tanmaxx-core/SKILL.md
 └── pnpm-workspace.yaml
 ```
 
@@ -56,8 +56,8 @@ Requires Node 24+ (for `--experimental-strip-types` in seed/generator scripts) a
 pnpm install
 echo "ANTHROPIC_API_KEY=sk-ant-…" > apps/web/.env.local
 
-pnpm --filter @gainsmax/web exec drizzle-kit push   # create SQLite schema
-pnpm --filter @gainsmax/web seed                    # 5,238 exercises + demo data
+pnpm --filter @tanmaxx/web exec drizzle-kit push   # create SQLite schema
+pnpm --filter @tanmaxx/web seed                    # 5,238 exercises + demo data
 pnpm dev                                            # http://localhost:3000
 ```
 
@@ -98,9 +98,9 @@ Two-handle slider, 0–110. The upper handle drives the theme; both feed the AI 
 `packages/skill` is shaped to be discoverable by `@tanstack/intent`. With the skill installed as a workspace dep of `apps/web`, it appears in `intent list` alongside the rest of the TanStack ecosystem:
 
 ```
-@gainsmax/skill                  local   0.1.0     1
-  gainsmax-core             [core]        Programmatically drive the GainsMax lifting tracker…
-  Load: pnpm dlx @tanstack/intent@latest load @gainsmax/skill#gainsmax-core
+@tanmaxx/skill                  local   0.1.0     1
+  tanmaxx-core             [core]        Programmatically drive the TanMaxx lifting tracker…
+  Load: pnpm dlx @tanstack/intent@latest load @tanmaxx/skill#tanmaxx-core
 ```
 
 Regenerate the skill from the canonical `_metadata.ts`:
@@ -116,10 +116,10 @@ pnpm gen:skill
 | `pnpm dev` | Start the Start dev server (`:3000`) |
 | `pnpm build` | Build for Nitro |
 | `pnpm typecheck` | All workspaces |
-| `pnpm gen:skill` | Re-render `packages/skill/skills/gainsmax-core/SKILL.md` from `_metadata.ts` |
+| `pnpm gen:skill` | Re-render `packages/skill/skills/tanmaxx-core/SKILL.md` from `_metadata.ts` |
 | `pnpm skill:list` | `intent list` |
 | `pnpm skill:validate` | `intent validate packages/skill` |
-| `pnpm --filter @gainsmax/web seed` | Wipe + reseed exercises and demo sessions |
+| `pnpm --filter @tanmaxx/web seed` | Wipe + reseed exercises and demo sessions |
 
 ## Locked decisions
 
