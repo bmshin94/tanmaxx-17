@@ -64,7 +64,7 @@ export const ROUTE_LIBRARIES: Record<string, RouteLibrariesEntry> = {
       { lib: 'hotkeys', doing: 'space / ↑↓ / ←→ / r / s / [ ] / gg gh gs / ?' },
       { lib: 'db', doing: 'setsCollection optimistic insert + sync indicator' },
       { lib: 'store', doing: 'Session state: current exercise, rest timer' },
-      { lib: 'ai', doing: 'NL set parser via generateObject' },
+      { lib: 'ai', doing: 'NL set parser via TanStack AI structured output' },
     ],
   },
   '/history': {
@@ -81,7 +81,7 @@ export const ROUTE_LIBRARIES: Record<string, RouteLibrariesEntry> = {
     blurb: 'Streaming chat with tool calls (logSet / queryPRs / generateProgram).',
     libs: [
       ...ALWAYS_ON,
-      { lib: 'ai', doing: 'Streaming useChat + Anthropic tools' },
+      { lib: 'ai', doing: 'TanStack AI streaming chat + Anthropic adapter + tool calls' },
       { lib: 'workflow', doing: 'generateProgram runs as a 4-step durable workflow' },
       { lib: 'intent', doing: 'Skill ships in packages/skill (gen:skill)' },
     ],

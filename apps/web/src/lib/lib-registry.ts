@@ -61,7 +61,7 @@ export const LIBRARIES: Record<string, Library> = {
     color: '#ec4899',
     textOnColor: 'black',
     status: 'alpha',
-    tagline: 'Unified AI SDK across providers',
+    tagline: 'Type-safe AI SDK with per-provider adapters',
   },
   intent: {
     id: 'intent',

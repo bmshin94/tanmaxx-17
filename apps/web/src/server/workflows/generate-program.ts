@@ -3,10 +3,34 @@ import {
   inMemoryRunStore,
   runWorkflow,
 } from '@tanstack/workflow-core'
-import { generateObject } from 'ai'
+import { chat } from '@tanstack/ai'
+import { anthropicText } from '@tanstack/ai-anthropic'
 import { z } from 'zod'
 import { programSchema, type Program } from '@tanmaxx/shared'
-import { anthropic, MODEL_SMART } from '../ai/anthropic'
+
+// Loose mirror of programSchema without numeric constraints. Anthropic's
+// structured-output endpoint rejects `minimum`/`maximum`/`multipleOf` keywords,
+// so we shape-match the model output, then run the strict `programSchema`
+// against the result inside the workflow's `validate` step.
+const programAiSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  workouts: z.array(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      targets: z.array(
+        z.object({
+          exerciseId: z.string(),
+          sets: z.number(),
+          reps: z.number(),
+          intensityPct: z.number(),
+        }),
+      ),
+    }),
+  ),
+})
+import { MODEL_SMART } from '../ai/anthropic'
 import { listPRs } from '../functions/list-prs'
 import { listHistory } from '../functions/list-history'
 import { getDb, schema } from '../db/client'
@@ -33,18 +57,19 @@ export const generateProgramWorkflow = createWorkflow({
   })
 
   const proposed = await ctx.step('proposeStructure', async () => {
-    const result = await generateObject({
-      model: anthropic()(MODEL_SMART),
-      schema: programSchema,
-      prompt: [
-        `Design a ${ctx.input.weeks}-week ${ctx.input.focus} program.`,
-        `Intensity range: ${ctx.input.lower}% to ${ctx.input.upper}% of 1RM (Maxx slider).`,
-        `Recent PRs: ${JSON.stringify(history.prs)}`,
-        `Sample history: ${JSON.stringify(history.recent)}`,
-        `Return a Program object with workouts[] and per-exercise targets.`,
-      ].join('\n'),
+    const prompt = [
+      `Design a ${ctx.input.weeks}-week ${ctx.input.focus} program.`,
+      `Intensity range: ${ctx.input.lower}% to ${ctx.input.upper}% of 1RM (Maxx slider).`,
+      `Recent PRs: ${JSON.stringify(history.prs)}`,
+      `Sample history: ${JSON.stringify(history.recent)}`,
+      `Return a Program object with workouts[] and per-exercise targets.`,
+    ].join('\n')
+
+    return await chat({
+      adapter: anthropicText(MODEL_SMART),
+      messages: [{ role: 'user', content: prompt }],
+      outputSchema: programAiSchema,
     })
-    return result.object
   })
 
   const validated = await ctx.step('validate', async () => programSchema.parse(proposed))

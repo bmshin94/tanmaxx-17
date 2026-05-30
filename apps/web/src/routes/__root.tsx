@@ -5,6 +5,7 @@ import type { QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { PacerDevtoolsPanel } from '@tanstack/react-pacer-devtools'
 import { FormDevtoolsPanel } from '@tanstack/react-form-devtools'
+import { aiDevtoolsPlugin } from '@tanstack/react-ai-devtools'
 import { AppShell } from '../components/AppShell'
 import { CollectionsDevtoolsPanel } from '../components/devtools/CollectionsDevtoolsPanel'
 import { RouteLibsBadge } from '../components/RouteLibsBadge'
@@ -68,12 +69,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <RouteLibsBadge />
         <TanStackDevtools
           config={{ position: 'bottom-right' }}
+          eventBusConfig={{ connectToServerBus: true }}
           plugins={[
             { name: 'TanStack Router', render: <TanStackRouterDevtoolsPanel /> },
             { name: 'TanStack Query', render: <ReactQueryDevtoolsPanel /> },
             { name: 'TanStack DB', render: <CollectionsDevtoolsPanel /> },
             { name: 'TanStack Pacer', render: <PacerDevtoolsPanel /> },
             { name: 'TanStack Form', render: <FormDevtoolsPanel /> },
+            aiDevtoolsPlugin(),
           ]}
         />
         <Scripts />

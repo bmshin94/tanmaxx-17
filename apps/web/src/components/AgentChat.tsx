@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useChat } from '@ai-sdk/react'
-import { DefaultChatTransport } from 'ai'
+import { fetchServerSentEvents, useChat } from '@tanstack/ai-react'
+import type { UIMessage } from '@tanstack/ai-react'
 import { useStore } from '@tanstack/react-store'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -10,18 +10,13 @@ export default function AgentChat() {
   const maxx = useStore(maxxStore, (s) => s)
   const [input, setInput] = useState('')
 
-  const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({
-      api: '/api/chat',
-      prepareSendMessagesRequest: ({ messages }) => ({
-        body: {
-          messages,
-          sessionId: 'seed-1',
-          lower: maxx.lower,
-          upper: maxx.upper,
-        },
-      }),
-    }),
+  const { messages, sendMessage, isLoading, error } = useChat({
+    connection: fetchServerSentEvents('/api/chat'),
+    body: {
+      sessionId: 'seed-1',
+      lower: maxx.lower,
+      upper: maxx.upper,
+    },
   })
 
   return (
@@ -39,24 +34,20 @@ export default function AgentChat() {
             Try: <em>"What are my PRs?"</em> or <em>"Build me a 4-week strength program."</em>
           </div>
         ) : (
-          messages.map((m) => (
-            <div key={m.id} className="text-sm">
-              <div className="mb-1 text-[10px] uppercase tracking-widest opacity-40">{m.role}</div>
-              <div className="space-y-2">
-                {m.parts.map((part, i) => (
-                  <MessagePart key={i} part={part} />
-                ))}
-              </div>
-            </div>
-          ))
+          messages.map((m) => <MessageView key={m.id} message={m} />)
         )}
+        {error ? (
+          <div className="rounded border border-rose-400/40 bg-rose-400/10 p-2 text-xs text-rose-200">
+            {error.message}
+          </div>
+        ) : null}
       </div>
 
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          if (!input.trim()) return
-          sendMessage({ text: input })
+          if (!input.trim() || isLoading) return
+          sendMessage(input.trim())
           setInput('')
         }}
         className="flex items-center gap-2"
@@ -66,43 +57,61 @@ export default function AgentChat() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask the agent…"
-          disabled={status === 'streaming' || status === 'submitted'}
+          disabled={isLoading}
           className="flex-1 rounded border border-white/15 bg-black/30 px-3 py-2 text-sm outline-none focus:border-white/40"
         />
         <button
           type="submit"
-          disabled={status === 'streaming' || status === 'submitted' || !input.trim()}
+          disabled={isLoading || !input.trim()}
           className="rounded bg-white px-4 py-2 text-sm font-bold text-black disabled:opacity-40"
         >
-          {status === 'streaming' ? '…' : 'send'}
+          {isLoading ? '…' : 'send'}
         </button>
       </form>
     </section>
   )
 }
 
-function MessagePart({ part }: { part: { type: string } }) {
-  const p = part as unknown as Record<string, unknown>
+function MessageView({ message }: { message: UIMessage }) {
+  return (
+    <div className="text-sm">
+      <div className="mb-1 text-[10px] uppercase tracking-widest opacity-40">{message.role}</div>
+      <div className="space-y-2">
+        {message.parts.map((part, i) => (
+          <MessagePart key={i} part={part} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
-  if (part.type === 'text') {
+type AnyPart = Record<string, unknown> & { type?: string }
+
+function MessagePart({ part }: { part: unknown }) {
+  const p = (part ?? {}) as AnyPart
+  const type = String(p.type ?? '')
+
+  if (type === 'text' && p.content) {
     return (
       <div className="md-content">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {String(p.text ?? '')}
-        </ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{String(p.content)}</ReactMarkdown>
       </div>
     )
   }
 
-  if (part.type.startsWith('tool-')) {
-    const toolName = part.type.replace(/^tool-/, '')
+  if (type === 'tool-call') {
     const state = String(p.state ?? '')
-    const running = state === 'input-streaming' || state === 'input-available'
-    const errored = state === 'output-error'
+    const running =
+      state === 'pending' ||
+      state === 'streaming' ||
+      state === 'input-streaming' ||
+      state === 'input-available' ||
+      state === 'approval-requested'
+    const errored = state === 'error' || state === 'failed' || state === 'rejected'
     const workflow = extractWorkflow(p.output)
     return (
       <div className="space-y-1">
-        <ToolPill toolName={toolName} running={running} errored={errored} />
+        <ToolPill toolName={String(p.name ?? '?')} running={running} errored={errored} />
         {workflow ? <WorkflowStepList workflow={workflow} /> : null}
       </div>
     )
