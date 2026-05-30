@@ -70,7 +70,7 @@ export function MaxxSlider() {
               onKeyDown={onKeyDownHandler}
               onMouseDown={onMouseDownHandler}
               onTouchStart={onTouchStart}
-              className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/70 outline-none ring-0 transition-transform"
+              className="absolute top-1/2 h-4 w-4 rounded-full border border-white/70 outline-none ring-0 transition-transform"
               style={{
                 left: `${ranger.getPercentageForValue(value)}%`,
                 background: 'var(--maxx-accent)',
