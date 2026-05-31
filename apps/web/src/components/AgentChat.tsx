@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { fetchServerSentEvents, useChat } from '@tanstack/ai-react'
 import type { UIMessage } from '@tanstack/ai-react'
-import { useStore } from '@tanstack/react-store'
+import { useSelector } from '@tanstack/react-store'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { maxxStore } from '../state/maxx-store'
+import { maxxStore } from '#/state/maxx-store'
 
 export default function AgentChat() {
-  const maxx = useStore(maxxStore, (s) => s)
+  const maxx = useSelector(maxxStore, (s) => s)
   const [input, setInput] = useState('')
 
   const { messages, sendMessage, isLoading, error } = useChat({

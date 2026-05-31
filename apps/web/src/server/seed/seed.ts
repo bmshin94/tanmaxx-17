@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getDb, schema } from '../db/client.ts'
+import { getDb, schema } from '#/server/db/client.ts'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 

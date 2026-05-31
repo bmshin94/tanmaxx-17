@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
-import { getProgram } from '../server/functions/get-program'
-import { exercisesCollection } from '../db/collections'
-import { useCollectionArray } from '../db/use-collection'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
+import { getProgram } from '#/server/functions/get-program'
+import { exercisesCollection } from '#/db/collections'
+import { useCollectionArray } from '#/db/use-collection'
 import type { Exercise } from '@tanmaxx/shared'
 
 export const Route = createFileRoute('/programs/$id')({

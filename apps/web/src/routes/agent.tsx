@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { lazy, Suspense } from 'react'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
 
-const AgentChat = lazy(() => import('../components/AgentChat'))
+const AgentChat = lazy(() => import('#/components/AgentChat'))
 
 export const Route = createFileRoute('/agent')({
   component: Agent,

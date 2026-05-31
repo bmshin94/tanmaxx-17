@@ -1,5 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { HistoryRow } from '../server/functions/list-history'
+import type { HistoryRow } from '#/server/functions/list-history'
 
 export const historyColumns: ColumnDef<HistoryRow>[] = [
   {

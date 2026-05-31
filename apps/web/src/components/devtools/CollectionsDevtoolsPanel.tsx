@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Collection } from '@tanstack/db'
-import { exercisesCollection, sessionsCollection, setsCollection } from '../../db/collections'
+import { exercisesCollection, sessionsCollection, setsCollection } from '#/db/collections'
 
 type CollectionLike = Collection<any, any, any, any, any>
 

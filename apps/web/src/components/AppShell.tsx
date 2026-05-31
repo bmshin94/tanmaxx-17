@@ -1,7 +1,7 @@
 import { Link, useMatches } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
-import { MaxxSlider } from './Maxx/MaxxSlider'
-import { getRouteLibraries } from '../lib/route-libraries'
+import { MaxxSlider } from '#/components/Maxx/MaxxSlider'
+import { getRouteLibraries } from '#/lib/route-libraries'
 
 const NAV = [
   { to: '/', label: 'Dashboard' },

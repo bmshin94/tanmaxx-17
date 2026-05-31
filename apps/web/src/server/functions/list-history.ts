@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import { desc, eq } from 'drizzle-orm'
-import { getDb, schema } from '../db/client'
+import { getDb, schema } from '#/server/db/client'
 
 export type HistoryRow = {
   id: string

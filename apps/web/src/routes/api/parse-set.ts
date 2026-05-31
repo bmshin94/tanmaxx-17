@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { chat } from '@tanstack/ai'
 import { anthropicText } from '@tanstack/ai-anthropic'
 import { z } from 'zod'
-import { MODEL_FAST } from '../../server/ai/anthropic'
+import { MODEL_FAST } from '#/server/ai/anthropic'
 
 // Anthropic's structured-output endpoint rejects JSON-Schema numeric
 // constraints (minimum, maximum, multipleOf), so keep the schema shape-only

@@ -2,7 +2,7 @@ import { drizzle } from 'drizzle-orm/better-sqlite3'
 import Database from 'better-sqlite3'
 import { mkdirSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
-import * as schema from './schema.ts'
+import * as schema from '#/server/db/schema.ts'
 
 const DB_PATH = resolve(process.cwd(), '.data/tanmaxx.db')
 

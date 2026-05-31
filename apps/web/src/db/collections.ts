@@ -1,9 +1,9 @@
 import { createCollection } from '@tanstack/db'
 import type { Exercise, Session, Set } from '@tanmaxx/shared'
-import { listExercises } from '../server/functions/list-exercises'
-import { listSessions } from '../server/functions/list-sessions'
-import { logSet } from '../server/functions/log-set'
-import { beginSync, endSync } from '../state/sync-store'
+import { listExercises } from '#/server/functions/list-exercises'
+import { listSessions } from '#/server/functions/list-sessions'
+import { logSet } from '#/server/functions/log-set'
+import { beginSync, endSync } from '#/state/sync-store'
 
 function makeFetchSync<T extends { id: string }>(load: () => Promise<T[]>) {
   return (params: {

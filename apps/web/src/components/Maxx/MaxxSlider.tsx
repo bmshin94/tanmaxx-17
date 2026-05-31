@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRanger, type Ranger } from '@tanstack/react-ranger'
-import { useStore } from '@tanstack/react-store'
-import { maxxStore, setMaxx } from '../../state/maxx-store'
-import { tierFor } from './maxx-tiers'
+import { useSelector } from '@tanstack/react-store'
+import { maxxStore, setMaxx } from '#/state/maxx-store'
+import { tierFor } from '#/components/Maxx/maxx-tiers'
 
 const MIN = 0
 const MAX = 110
 
 export function MaxxSlider() {
-  const persisted = useStore(maxxStore, (s) => s)
+  const persisted = useSelector(maxxStore, (s) => s)
   const [values, setValues] = useState<number[]>([persisted.lower, persisted.upper])
   const trackRef = useRef<HTMLDivElement>(null)
   const [, force] = useState(0)

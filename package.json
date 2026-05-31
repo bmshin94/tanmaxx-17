@@ -15,6 +15,7 @@
     "skill:publish": "pnpm --filter @tanmaxx/skill publish --access public"
   },
   "devDependencies": {
+    "@tanstack/intent": "^0.0.41",
     "@types/node": "^22.10.2",
     "typescript": "^6.0.2"
   }

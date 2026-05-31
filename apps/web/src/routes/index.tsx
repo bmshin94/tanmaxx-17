@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { useStore } from '@tanstack/react-store'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
-import { listPRs } from '../server/functions/list-prs'
-import { listSessions } from '../server/functions/list-sessions'
-import { listHistory } from '../server/functions/list-history'
-import { tierFor } from '../components/Maxx/maxx-tiers'
-import { maxxStore } from '../state/maxx-store'
+import { useSelector } from '@tanstack/react-store'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
+import { listPRs } from '#/server/functions/list-prs'
+import { listSessions } from '#/server/functions/list-sessions'
+import { listHistory } from '#/server/functions/list-history'
+import { tierFor } from '#/components/Maxx/maxx-tiers'
+import { maxxStore } from '#/state/maxx-store'
 
 export const Route = createFileRoute('/')({
   component: Dashboard,
@@ -14,7 +14,7 @@ export const Route = createFileRoute('/')({
 })
 
 function Dashboard() {
-  const maxx = useStore(maxxStore, (s) => s)
+  const maxx = useSelector(maxxStore, (s) => s)
   const tier = tierFor(maxx.upper)
 
   const prs = useQuery({ queryKey: ['prs'], queryFn: () => listPRs() })

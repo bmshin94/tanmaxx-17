@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@tanstack/intent':
+        specifier: ^0.0.41
+        version: 0.0.41
       '@types/node':
         specifier: ^22.10.2
         version: 22.19.19

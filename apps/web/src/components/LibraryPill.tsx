@@ -1,4 +1,4 @@
-import { LIBRARIES, type LibId } from '../lib/lib-registry'
+import { LIBRARIES, type LibId } from '#/lib/lib-registry'
 
 type Size = 'sm' | 'md'
 

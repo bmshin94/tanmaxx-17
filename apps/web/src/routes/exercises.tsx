@@ -2,9 +2,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useRef, useState, useMemo } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { useDebouncedValue } from '@tanstack/react-pacer'
-import { exercisesCollection } from '../db/collections'
-import { useCollectionArray } from '../db/use-collection'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
+import { exercisesCollection } from '#/db/collections'
+import { useCollectionArray } from '#/db/use-collection'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
 
 export const Route = createFileRoute('/exercises')({
   component: Exercises,

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMatches } from '@tanstack/react-router'
-import { getRouteLibraries } from '../lib/route-libraries'
-import { LIBRARIES } from '../lib/lib-registry'
-import { LibraryPill } from './LibraryPill'
+import { getRouteLibraries } from '#/lib/route-libraries'
+import { LIBRARIES } from '#/lib/lib-registry'
+import { LibraryPill } from '#/components/LibraryPill'
 
 const AUTO_OPEN_MS = 4_000
 const FLASH_MS = 600

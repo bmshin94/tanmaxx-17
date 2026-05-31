@@ -1,4 +1,4 @@
-import type { LibId } from './lib-registry'
+import type { LibId } from '#/lib/lib-registry'
 
 export type RouteLibraryUsage = {
   lib: LibId

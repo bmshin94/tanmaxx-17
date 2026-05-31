@@ -1,8 +1,8 @@
-import { useStore } from '@tanstack/react-store'
-import { syncStore } from '../state/sync-store'
+import { useSelector } from '@tanstack/react-store'
+import { syncStore } from '#/state/sync-store'
 
 export function SyncIndicator() {
-  const inFlight = useStore(syncStore, (s) => s.inFlight)
+  const inFlight = useSelector(syncStore, (s) => s.inFlight)
   const isSyncing = inFlight > 0
 
   return (

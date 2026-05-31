@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { setDraftSchema, type Set } from '@tanmaxx/shared'
-import { getDb, schema } from '../db/client'
+import { getDb, schema } from '#/server/db/client'
 
 const inputSchema = setDraftSchema.extend({
   id: z.string().optional(),

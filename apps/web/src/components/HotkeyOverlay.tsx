@@ -1,4 +1,4 @@
-import { HOTKEYS } from '../lib/hotkey-registry'
+import { HOTKEYS } from '#/lib/hotkey-registry'
 
 export function HotkeyOverlay({
   open,

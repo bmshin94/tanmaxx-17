@@ -8,9 +8,9 @@ import {
   useReactTable,
   type SortingState,
 } from '@tanstack/react-table'
-import { listHistory } from '../server/functions/list-history'
-import { historyColumns } from '../lib/table-columns'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
+import { listHistory } from '#/server/functions/list-history'
+import { historyColumns } from '#/lib/table-columns'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
 
 export const Route = createFileRoute('/history')({
   component: History,

@@ -109,6 +109,37 @@ Regenerate the skill from the canonical `_metadata.ts`:
 pnpm gen:skill
 ```
 
+### Configuring for Cursor & Claude Code
+
+The `skill:*` scripts are just thin wrappers around the `intent` CLI:
+
+| Script | Underlying command | What it does |
+|---|---|---|
+| `pnpm skill:list` | `intent list` | Lists `intent`-enabled packages + skills found in the workspace |
+| `pnpm skill:validate` | `intent validate packages/skill` | Validates the skill files in `packages/skill` |
+| `pnpm skill:publish` | `pnpm --filter @tanmaxx/skill publish` | Publishes `@tanmaxx/skill` to npm |
+
+To make a coding agent automatically discover and load the TanMaxx skill, drop skill-loading guidance into the agent's config file. `intent install` generates this block for you (dry-run first to preview):
+
+```bash
+# Preview the block
+pnpm dlx @tanstack/intent@latest install --dry-run
+
+# Write it into AGENTS.md
+pnpm dlx @tanstack/intent@latest install
+```
+
+- **Cursor** reads `AGENTS.md` (and `.cursor/rules/*`) automatically, so `intent install` works out of the box. The generated block tells the agent to run `intent list` to discover skills and `intent load @tanmaxx/skill#tanmaxx-core` to load this one.
+- **Claude Code** reads `CLAUDE.md`. Either point it at the generated `AGENTS.md` or copy the `<!-- intent-skills:start -->…<!-- intent-skills:end -->` block into `CLAUDE.md`.
+
+Once configured, the agent loads the skill on demand:
+
+```bash
+pnpm dlx @tanstack/intent@latest load @tanmaxx/skill#tanmaxx-core
+```
+
+That prints the `SKILL.md` describing the three agent-callable server functions (`logSet`, `queryPRs`, `generateProgram`) and their input schemas.
+
 ## Useful scripts
 
 | Command | Purpose |
@@ -116,10 +147,13 @@ pnpm gen:skill
 | `pnpm dev` | Start the Start dev server (`:3000`) |
 | `pnpm build` | Build for Nitro |
 | `pnpm typecheck` | All workspaces |
-| `pnpm gen:skill` | Re-render `packages/skill/skills/tanmaxx-core/SKILL.md` from `_metadata.ts` |
-| `pnpm skill:list` | `intent list` |
-| `pnpm skill:validate` | `intent validate packages/skill` |
+| `pnpm gen:skill` | Re-render `packages/skill/skills/tanmaxx-core/SKILL.md` from `apps/web/src/server/functions/_metadata.ts` (`intent`-shaped skill is auto-generated, never hand-edited) |
+| `pnpm skill:list` | Run `intent list` from the workspace root to discover every `intent`-enabled package (incl. `@tanmaxx/skill`) and its skills |
+| `pnpm skill:validate` | Run `intent validate packages/skill` to lint the skill front-matter and structure before publishing |
+| `pnpm skill:publish` | `pnpm publish` the `@tanmaxx/skill` package to npm with public access |
 | `pnpm --filter @tanmaxx/web seed` | Wipe + reseed exercises and demo sessions |
+
+> The `skill:*` scripts shell out to the `intent` CLI, which is a root `devDependency`. They must be run from the repo root so `intent` can scan the whole workspace.
 
 ## Locked decisions
 

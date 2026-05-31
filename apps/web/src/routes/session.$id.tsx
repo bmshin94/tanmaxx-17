@@ -2,18 +2,18 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from '@tanstack/react-form'
-import { useStore } from '@tanstack/react-store'
-import { exercisesCollection, setsCollection } from '../db/collections'
-import { useCollectionArray } from '../db/use-collection'
-import { sessionStore } from '../state/session-store'
-import { ensureSession } from '../server/functions/ensure-session'
-import { getSession } from '../server/functions/get-session'
-import { useAppHotkeys } from '../hooks/use-app-hotkeys'
-import { HotkeyOverlay } from '../components/HotkeyOverlay'
-import { RestTimer } from '../components/RestTimer'
-import { NLSetInput } from '../components/NLSetInput'
-import { RouteError } from '../components/Skeleton'
-import { SyncIndicator } from '../components/SyncIndicator'
+import { useSelector } from '@tanstack/react-store'
+import { exercisesCollection, setsCollection } from '#/db/collections'
+import { useCollectionArray } from '#/db/use-collection'
+import { sessionStore } from '#/state/session-store'
+import { ensureSession } from '#/server/functions/ensure-session'
+import { getSession } from '#/server/functions/get-session'
+import { useAppHotkeys } from '#/hooks/use-app-hotkeys'
+import { HotkeyOverlay } from '#/components/HotkeyOverlay'
+import { RestTimer } from '#/components/RestTimer'
+import { NLSetInput } from '#/components/NLSetInput'
+import { RouteError } from '#/components/Skeleton'
+import { SyncIndicator } from '#/components/SyncIndicator'
 
 export const Route = createFileRoute('/session/$id')({
   component: Session,
@@ -25,7 +25,7 @@ function Session() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const exercises = useCollectionArray(exercisesCollection)
-  const currentExerciseIdx = useStore(sessionStore, (s) => s.currentExerciseIdx)
+  const currentExerciseIdx = useSelector(sessionStore, (s) => s.currentExerciseIdx)
   const [overlayOpen, setOverlayOpen] = useState(false)
 
   // Ensure session row exists, then load sets.

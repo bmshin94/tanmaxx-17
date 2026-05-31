@@ -1,8 +1,8 @@
 import { toolDefinition } from '@tanstack/ai'
 import { z } from 'zod'
-import { logSet } from '../functions/log-set'
-import { listPRs } from '../functions/list-prs'
-import { runGenerateProgram } from '../workflows/generate-program'
+import { logSet } from '#/server/functions/log-set'
+import { listPRs } from '#/server/functions/list-prs'
+import { runGenerateProgram } from '#/server/workflows/generate-program'
 
 export const logSetToolDef = toolDefinition({
   name: 'logSet',

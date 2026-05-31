@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useQuery } from '@tanstack/react-query'
-import { RouteError, RowsSkeleton } from '../components/Skeleton'
-import { listPrograms } from '../server/functions/list-programs'
+import { RouteError, RowsSkeleton } from '#/components/Skeleton'
+import { listPrograms } from '#/server/functions/list-programs'
 
 export const Route = createFileRoute('/programs')({
   component: Programs,

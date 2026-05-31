@@ -8,17 +8,17 @@ description: >
   validate input with Zod and accept the same shapes used inside the app.
 type: core
 library: tanmaxx
-library_version: '0.1.0'
+library_version: "0.1.0"
 ---
 
 # TanMaxx — Agent API
 
 TanMaxx exposes three agent-callable server functions. They live in a TanStack Start app and are reachable from any client that can POST JSON to the running server.
 
-| Function | Purpose |
-|---|---|
-| `logSet` | Persist a completed set into the current session. |
-| `queryPRs` | Fetch the top weight (PR proxy) per exercise across all logged sessions. |
+| Function          | Purpose                                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `logSet`          | Persist a completed set into the current session.                                                                       |
+| `queryPRs`        | Fetch the top weight (PR proxy) per exercise across all logged sessions.                                                |
 | `generateProgram` | Generate a multi-week strength program tailored to recent training history and the user’s current Maxx intensity range. |
 
 The Maxx slider (lower–upper, range 0–110) is the intensity authority. Read it from localStorage key `tanmaxx.maxx` (`{ lower: number; upper: number }`) before calling `generateProgram`.
@@ -33,6 +33,7 @@ Persist a completed set into the current session. Returns the canonical row with
 - **URL:** `/api/serverFn/log-set`
 
 **Input schema (JSON Schema draft-07):**
+
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -66,27 +67,22 @@ Persist a completed set into the current session. Returns the canonical row with
       ]
     }
   },
-  "required": [
-    "sessionId",
-    "exerciseId",
-    "weight",
-    "reps",
-    "rpe"
-  ],
+  "required": ["sessionId", "exerciseId", "weight", "reps", "rpe"],
   "additionalProperties": false
 }
 ```
 
 **Examples:**
+
 - 225 lb back squat, 5 reps, RPE 8
   ```json
-{
-  "sessionId": "seed-1",
-  "exerciseId": "Barbell_Squat__standard",
-  "weight": 225,
-  "reps": 5,
-  "rpe": 8
-}
+  {
+    "sessionId": "seed-1",
+    "exerciseId": "Barbell_Squat__standard",
+    "weight": 225,
+    "reps": 5,
+    "rpe": 8
+  }
   ```
 
 ---
@@ -99,6 +95,7 @@ Fetch the top weight (PR proxy) per exercise across all logged sessions. No inpu
 - **URL:** `/api/serverFn/list-prs`
 
 **Input schema (JSON Schema draft-07):**
+
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -109,9 +106,10 @@ Fetch the top weight (PR proxy) per exercise across all logged sessions. No inpu
 ```
 
 **Examples:**
+
 - List all PRs
   ```json
-{}
+  {}
   ```
 
 ---
@@ -124,6 +122,7 @@ Generate a multi-week strength program tailored to recent training history and t
 - **URL:** `/api/serverFn/generate-program`
 
 **Input schema (JSON Schema draft-07):**
+
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -138,28 +137,26 @@ Generate a multi-week strength program tailored to recent training history and t
       "type": "string"
     }
   },
-  "required": [
-    "weeks",
-    "focus"
-  ],
+  "required": ["weeks", "focus"],
   "additionalProperties": false
 }
 ```
 
 **Examples:**
+
 - 4-week strength block
   ```json
-{
-  "weeks": 4,
-  "focus": "strength"
-}
+  {
+    "weeks": 4,
+    "focus": "strength"
+  }
   ```
 - 6-week hypertrophy block
   ```json
-{
-  "weeks": 6,
-  "focus": "hypertrophy"
-}
+  {
+    "weeks": 6,
+    "focus": "hypertrophy"
+  }
   ```
 
 ## When to compose

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useStore } from '@tanstack/react-store'
-import { sessionStore, startRestTimer } from '../state/session-store'
+import { useSelector } from '@tanstack/react-store'
+import { sessionStore, startRestTimer } from '#/state/session-store'
 
 export function RestTimer() {
-  const timer = useStore(sessionStore, (s) => s.restTimer)
+  const timer = useSelector(sessionStore, (s) => s.restTimer)
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {

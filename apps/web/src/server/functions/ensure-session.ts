@@ -2,7 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { eq } from 'drizzle-orm'
 import type { Session } from '@tanmaxx/shared'
-import { getDb, schema } from '../db/client'
+import { getDb, schema } from '#/server/db/client'
 
 export const ensureSession = createServerFn({ method: 'POST' })
   .inputValidator(z.object({ id: z.string() }))

@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import type { Exercise } from '@tanmaxx/shared'
-import { getDb, schema } from '../db/client'
+import { getDb, schema } from '#/server/db/client'
 
 export const listExercises = createServerFn({ method: 'GET' }).handler(async (): Promise<Exercise[]> => {
   const rows = await getDb().select().from(schema.exercises).all()

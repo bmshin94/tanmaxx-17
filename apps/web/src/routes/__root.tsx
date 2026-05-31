@@ -6,12 +6,12 @@ import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 import { PacerDevtoolsPanel } from '@tanstack/react-pacer-devtools'
 import { FormDevtoolsPanel } from '@tanstack/react-form-devtools'
 import { aiDevtoolsPlugin } from '@tanstack/react-ai-devtools'
-import { AppShell } from '../components/AppShell'
-import { CollectionsDevtoolsPanel } from '../components/devtools/CollectionsDevtoolsPanel'
-import { RouteLibsBadge } from '../components/RouteLibsBadge'
-import { useMaxxStyle } from '../hooks/use-maxx-style'
+import { AppShell } from '#/components/AppShell'
+import { CollectionsDevtoolsPanel } from '#/components/devtools/CollectionsDevtoolsPanel'
+import { RouteLibsBadge } from '#/components/RouteLibsBadge'
+import { useMaxxStyle } from '#/hooks/use-maxx-style'
 
-import appCss from '../styles.css?url'
+import appCss from '#/styles.css?url'
 
 // Inline script: reads localStorage and sets data-maxx-tier + key CSS vars BEFORE React hydrates,
 // avoiding theme/font flash on reload (the joke lands harder when a fresh load opens in GIGAMAXX).

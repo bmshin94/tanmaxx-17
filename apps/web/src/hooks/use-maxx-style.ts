@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { maxxStore, hydrateMaxxStore } from '../state/maxx-store'
-import { lerpAtAnchors, lerpHslAtAnchors, tierFor } from '../components/Maxx/maxx-tiers'
+import { maxxStore, hydrateMaxxStore } from '#/state/maxx-store'
+import { lerpAtAnchors, lerpHslAtAnchors, tierFor } from '#/components/Maxx/maxx-tiers'
 
 const ACCENT_ANCHORS: ReadonlyArray<[number, [number, number, number]]> = [
   [0, [200, 80, 55]],
