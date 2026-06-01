@@ -69,6 +69,10 @@ export const generateProgramWorkflow = createWorkflow({
       adapter: anthropicText(MODEL_SMART),
       messages: [{ role: "user", content: prompt }],
       outputSchema: programAiSchema,
+      // A multi-week program serializes to well over the adapter's default
+      // 1024-token cap; without this the structured-output response is
+      // truncated (stop_reason: max_tokens) and finalization yields no result.
+      maxTokens: 8192,
     });
   });
 
